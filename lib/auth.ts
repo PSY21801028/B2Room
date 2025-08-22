@@ -1,4 +1,4 @@
-import supabase from './supabase'
+import { createClient } from '../utils/supabase/client'
 import type { User, AuthError, Session } from '@supabase/supabase-js'
 
 export interface AuthResult {
@@ -20,6 +20,7 @@ export interface SignInData {
 // 회원가입
 export const signUp = async ({ email, password, fullName }: SignUpData): Promise<AuthResult> => {
   try {
+    const supabase = createClient()
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -45,6 +46,7 @@ export const signUp = async ({ email, password, fullName }: SignUpData): Promise
 // 로그인
 export const signIn = async ({ email, password }: SignInData): Promise<AuthResult> => {
   try {
+    const supabase = createClient()
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -65,6 +67,7 @@ export const signIn = async ({ email, password }: SignInData): Promise<AuthResul
 // 로그아웃
 export const signOut = async (): Promise<{ error: AuthError | null }> => {
   try {
+    const supabase = createClient()
     const { error } = await supabase.auth.signOut()
     return { error }
   } catch (error) {
@@ -75,6 +78,7 @@ export const signOut = async (): Promise<{ error: AuthError | null }> => {
 // 현재 사용자 가져오기
 export const getCurrentUser = async (): Promise<User | null> => {
   try {
+    const supabase = createClient()
     const { data: { user } } = await supabase.auth.getUser()
     return user
   } catch (error) {
@@ -86,6 +90,7 @@ export const getCurrentUser = async (): Promise<User | null> => {
 // 현재 세션 가져오기
 export const getCurrentSession = async (): Promise<Session | null> => {
   try {
+    const supabase = createClient()
     const { data: { session } } = await supabase.auth.getSession()
     return session
   } catch (error) {
@@ -97,6 +102,7 @@ export const getCurrentSession = async (): Promise<Session | null> => {
 // 비밀번호 재설정 이메일 발송
 export const resetPassword = async (email: string): Promise<{ error: AuthError | null }> => {
   try {
+    const supabase = createClient()
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/auth/reset-password`,
     })
@@ -109,6 +115,7 @@ export const resetPassword = async (email: string): Promise<{ error: AuthError |
 // 비밀번호 업데이트
 export const updatePassword = async (password: string): Promise<{ error: AuthError | null }> => {
   try {
+    const supabase = createClient()
     const { error } = await supabase.auth.updateUser({
       password,
     })
@@ -124,6 +131,7 @@ export const updateUserProfile = async (updates: {
   avatarUrl?: string
 }): Promise<{ error: AuthError | null }> => {
   try {
+    const supabase = createClient()
     const { error } = await supabase.auth.updateUser({
       data: {
         full_name: updates.fullName,
@@ -138,6 +146,7 @@ export const updateUserProfile = async (updates: {
 
 // 인증 상태 변화 리스너
 export const onAuthStateChange = (callback: (event: string, session: Session | null) => void) => {
+  const supabase = createClient()
   return supabase.auth.onAuthStateChange(callback)
 }
 

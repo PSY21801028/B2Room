@@ -1,29 +1,47 @@
 import Image from "next/image";
+import SupabaseTestButton from "@/components/SupabaseTestButton";
+import DataInsertButton from "@/components/DataInsertButton";
+import TableCreationGuide from "@/components/TableCreationGuide";
 
 export default function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start max-w-4xl w-full">
+        <div className="flex flex-col items-center sm:items-start gap-6">
+          <Image
+            className="dark:invert"
+            src="/next.svg"
+            alt="Next.js logo"
+            width={180}
+            height={38}
+            priority
+          />
+          <h1 className="text-3xl font-bold text-gray-800">🏠 B2Room - 숙소 예약 플랫폼</h1>
+        </div>
+
+        {/* Supabase 테스트 컴포넌트 */}
+        <SupabaseTestButton />
+        
+        {/* 테이블 생성 가이드 */}
+        <TableCreationGuide />
+        
+        {/* 데이터 삽입 컴포넌트 */}
+        <DataInsertButton />
+
+        <div className="w-full border-t pt-8">
+          <h2 className="text-xl font-semibold mb-4">📚 개발 가이드</h2>
+          <ol className="font-mono list-inside list-decimal text-sm/6 text-left space-y-2">
+            <li className="mb-2 tracking-[-.01em]">
+              위의 테스트 버튼으로 Supabase 연결을 확인하세요.
+            </li>
+            <li className="tracking-[-.01em]">
+              테이블이 없다면 Supabase 콘솔에서 SQL 스크립트를 실행하세요.
+            </li>
+            <li className="tracking-[-.01em]">
+              Toast 알림으로 실시간 상태를 확인할 수 있습니다.
+            </li>
+          </ol>
+        </div>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
