@@ -1,0 +1,28 @@
+---
+description: Next.js 프로젝트를 위한 Shadcn/UI 및 모범 사례 규칙
+globs:
+  - '**/*.ts'
+  - '**/*.tsx'
+alwaysApply: false
+---
+
+# 프로젝트 규칙
+
+이 문서는 AI가 Next.js 프로젝트에서 코드를 생성하거나 수정할 때 따라야 하는 지침을 정의합니다.
+
+### 1. Shadcn/UI 컴포넌트 사용
+
+* 모든 UI 컴포넌트는 Shadcn/UI 라이브러리를 사용해야 합니다.
+* 컴포넌트를 추가할 때, 항상 최신 명령어를 사용해야 합니다:
+  `npx shadcn-ui@latest add [component-name]`
+  
+### 2. Next.js 모범 사례
+
+* 모든 페이지 및 컴포넌트는 App Router를 사용해야 합니다.
+* 가능하다면 서버 컴포넌트(Server Components)를 우선적으로 사용하고, 필요한 경우에만 `use client` 지시어를 사용해야 합니다.
+* 파일 경로와 구조는 Next.js 컨벤션을 따릅니다.
+
+### 3. 타입스크립트 및 코드 스타일
+
+* 항상 타입스크립트(TypeScript)를 사용하고, 명확성을 위해 모든 함수와 변수의 타입을 명시해야 합니다.
+* 아이콘은 `lucide-react` 라이브러리를 사용해야 합니다.
