@@ -12,35 +12,122 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      // 예시 테이블 구조
-      users: {
+      furniture_categories: {
         Row: {
-          id: string
-          email: string
-          full_name: string | null
-          avatar_url: string | null
+          id: number
+          name: string
+          description: string | null
           created_at: string
-          updated_at: string
         }
         Insert: {
-          id?: string
-          email: string
-          full_name?: string | null
-          avatar_url?: string | null
+          id?: number
+          name: string
+          description?: string | null
           created_at?: string
-          updated_at?: string
         }
         Update: {
-          id?: string
-          email?: string
-          full_name?: string | null
-          avatar_url?: string | null
+          id?: number
+          name?: string
+          description?: string | null
           created_at?: string
-          updated_at?: string
         }
         Relationships: []
       }
-      // 추가 테이블들을 여기에 정의하세요
+      furniture_items: {
+        Row: {
+          id: number
+          category_id: number
+          product_name: string
+          brand: string | null
+          price: number | null
+          url: string | null
+          image_url: string | null
+          size: string | null
+          description: string | null
+          style_tags: string[] | null
+          color_tags: string[] | null
+          material_tags: string[] | null
+          created_at: string
+        }
+        Insert: {
+          id?: number
+          category_id: number
+          product_name: string
+          brand?: string | null
+          price?: number | null
+          url?: string | null
+          image_url?: string | null
+          size?: string | null
+          description?: string | null
+          style_tags?: string[] | null
+          color_tags?: string[] | null
+          material_tags?: string[] | null
+          created_at?: string
+        }
+        Update: {
+          id?: number
+          category_id?: number
+          product_name?: string
+          brand?: string | null
+          price?: number | null
+          url?: string | null
+          image_url?: string | null
+          size?: string | null
+          description?: string | null
+          style_tags?: string[] | null
+          color_tags?: string[] | null
+          material_tags?: string[] | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "furniture_items_category_id_fkey"
+            columns: ["category_id"]
+            referencedRelation: "furniture_categories"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      furniture_attributes: {
+        Row: {
+          id: number
+          furniture_id: number
+          mood_keywords: string[] | null
+          colors: string[] | null
+          materials: string[] | null
+          forms: string[] | null
+          patterns: string[] | null
+          created_at: string
+        }
+        Insert: {
+          id?: number
+          furniture_id: number
+          mood_keywords?: string[] | null
+          colors?: string[] | null
+          materials?: string[] | null
+          forms?: string[] | null
+          patterns?: string[] | null
+          created_at?: string
+        }
+        Update: {
+          id?: number
+          furniture_id?: number
+          mood_keywords?: string[] | null
+          colors?: string[] | null
+          materials?: string[] | null
+          forms?: string[] | null
+          patterns?: string[] | null
+          created_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "furniture_attributes_furniture_id_fkey"
+            columns: ["furniture_id"]
+            referencedRelation: "furniture_items"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -61,3 +148,28 @@ export interface Database {
 export type Tables<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Row']
 export type Enums<T extends keyof Database['public']['Enums']> = Database['public']['Enums'][T]
 
+// 추가 타입 정의
+export type FurnitureCategory = Tables<'furniture_categories'>
+export type FurnitureItem = Tables<'furniture_items'>
+export type FurnitureAttributes = Tables<'furniture_attributes'>
+
+// 조인된 가구 데이터 타입
+export interface FurnitureWithCategory extends FurnitureItem {
+  category: FurnitureCategory
+  attributes?: FurnitureAttributes
+}
+
+// 스타일 필터 타입
+export type StyleFilter = 'modern' | 'minimal' | 'natural' | 'vintage' | 'nordic' | 'classic'
+
+// AI 추천 파라미터 타입
+export interface RecommendationParams {
+  style: StyleFilter
+  spaceType: string
+  colorPreference?: string[]
+  priceRange?: {
+    min: number
+    max: number
+  }
+  limit?: number
+}

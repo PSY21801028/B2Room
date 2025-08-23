@@ -1,121 +1,125 @@
-import Image from "next/image";
-import SupabaseTestButton from "@/components/SupabaseTestButton";
-import DataInsertButton from "@/components/DataInsertButton";
-import TableCreationGuide from "@/components/TableCreationGuide";
+"use client";
 
-export default function Home() {
+import { Camera, Image, X } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { toast } from "sonner";
+
+export default function PhotoUploadPage() {
+  const [isLoading, setIsLoading] = useState(false);
+
+
+  
+  const handleCameraCapture = async () => {
+    setIsLoading(true);
+    toast.info("카메라를 열고 있습니다...");
+    
+    try {
+      // 실제 카메라 기능은 나중에 구현
+      setTimeout(() => {
+        toast.success("카메라가 준비되었습니다!");
+        setIsLoading(false);
+      }, 1000);
+    } catch (error) {
+      toast.error("카메라를 열 수 없습니다.");
+      setIsLoading(false);
+    }
+  };
+
+  const handleGallerySelect = async () => {
+    setIsLoading(true);
+    toast.info("갤러리를 열고 있습니다...");
+    
+    try {
+      // 실제 갤러리 기능은 나중에 구현
+      setTimeout(() => {
+        toast.success("갤러리가 준비되었습니다!");
+        setIsLoading(false);
+      }, 1000);
+    } catch (error) {
+      toast.error("갤러리를 열 수 없습니다.");
+      setIsLoading(false);
+    }
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start max-w-4xl w-full">
-        <div className="flex flex-col items-center sm:items-start gap-6">
-          <Image
-            className="dark:invert"
-            src="/next.svg"
-            alt="Next.js logo"
-            width={180}
-            height={38}
-            priority
-          />
-          <h1 className="text-3xl font-bold text-gray-800">🏠 B2Room - 숙소 예약 플랫폼</h1>
+    <div className="relative flex size-full min-h-screen flex-col bg-[#33271e] mobile-container">
+      {/* Header */}
+      <header className="absolute top-0 z-20 w-full p-4">
+        <div className="flex items-center justify-between">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="flex h-12 w-12 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10"
+          >
+            <X className="h-8 w-8" />
+          </Button>
+          <h1 className="text-xl font-semibold text-white">방 사진 업로드</h1>
+          <div className="w-12"></div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex flex-1 flex-col items-center justify-center bg-[#5d4837]">
+        <div className="flex flex-1 flex-col items-center justify-center text-center px-6">
+          <div className="mb-8 flex flex-col items-center gap-4">
+            {/* Camera Icon */}
+            <div className="text-[#a7896d]">
+              <Camera className="w-20 h-20" />
+            </div>
+            <p className="text-lg font-medium text-[#f5f0eb]">
+              카메라를 열어 공간을 촬영하거나<br/>
+              갤러리에서 사진을 선택하세요.
+            </p>
+          </div>
+
+          {/* Camera Capture Button */}
+          <Button
+            onClick={handleCameraCapture}
+            disabled={isLoading}
+            className="flex h-24 w-24 items-center justify-center rounded-full border-4 border-[#f5f0eb] bg-transparent p-2 transition-transform active:scale-95 hover:bg-transparent"
+          >
+            <div className="flex h-full w-full items-center justify-center rounded-full bg-[#f5f0eb]">
+              <Camera className="w-12 h-12 text-[#5d4837]" />
+            </div>
+          </Button>
+          <p className="mt-4 text-base font-semibold text-[#f5f0eb]">사진 촬영</p>
         </div>
 
-        {/* Supabase 테스트 컴포넌트 */}
-        <SupabaseTestButton />
-        
-        {/* 테이블 생성 가이드 */}
-        <TableCreationGuide />
-        
-        {/* 데이터 삽입 컴포넌트 */}
-        <DataInsertButton />
-
-        <div className="w-full border-t pt-8">
-          <h2 className="text-xl font-semibold mb-4">📚 개발 가이드</h2>
-          <ol className="font-mono list-inside list-decimal text-sm/6 text-left space-y-2">
-            <li className="mb-2 tracking-[-.01em]">
-              위의 테스트 버튼으로 Supabase 연결을 확인하세요.
-            </li>
-            <li className="tracking-[-.01em]">
-              테이블이 없다면 Supabase 콘솔에서 SQL 스크립트를 실행하세요.
-            </li>
-            <li className="tracking-[-.01em]">
-              Toast 알림으로 실시간 상태를 확인할 수 있습니다.
-            </li>
-          </ol>
-        </div>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Bottom Gallery Button */}
+        <div className="w-full bg-[#33271e] p-6 pb-8 space-y-3">
+          <Button
+            onClick={handleGallerySelect}
+            disabled={isLoading}
+            className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#715845] py-4 px-6 text-lg font-semibold text-[#f5f0eb] transition-colors hover:bg-[#8d7057]"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <Image className="w-6 h-6" />
+            <span>갤러리에서 불러오기</span>
+          </Button>
+          
+          {/* Demo Navigation */}
+          <div className="space-y-2">
+            <Link href="/analysis">
+              <Button
+                variant="outline"
+                className="w-full border-[#a7896d] text-[#e9e1d8] hover:bg-[#715845] py-3"
+              >
+                데모: 분석 단계로 바로 이동
+              </Button>
+            </Link>
+            
+            <Link href="/result">
+              <Button
+                variant="outline"
+                className="w-full border-[#a7896d] text-[#e9e1d8] hover:bg-[#715845] py-2 text-sm"
+              >
+                📊 가구 추천 결과 보기 (DB 연동 테스트)
+              </Button>
+            </Link>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
