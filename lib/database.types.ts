@@ -16,26 +16,20 @@ export interface Database {
         Row: {
           id: number
           name: string
-          description: string | null
-          created_at: string
         }
         Insert: {
           id?: number
           name: string
-          description?: string | null
-          created_at?: string
         }
         Update: {
           id?: number
           name?: string
-          description?: string | null
-          created_at?: string
         }
         Relationships: []
       }
       furniture_items: {
         Row: {
-          id: number
+          id: string // uuid
           category_id: number
           product_name: string
           brand: string | null
@@ -43,14 +37,10 @@ export interface Database {
           url: string | null
           image_url: string | null
           size: string | null
-          description: string | null
-          style_tags: string[] | null
-          color_tags: string[] | null
-          material_tags: string[] | null
           created_at: string
         }
         Insert: {
-          id?: number
+          id?: string
           category_id: number
           product_name: string
           brand?: string | null
@@ -58,14 +48,10 @@ export interface Database {
           url?: string | null
           image_url?: string | null
           size?: string | null
-          description?: string | null
-          style_tags?: string[] | null
-          color_tags?: string[] | null
-          material_tags?: string[] | null
           created_at?: string
         }
         Update: {
-          id?: number
+          id?: string
           category_id?: number
           product_name?: string
           brand?: string | null
@@ -73,10 +59,6 @@ export interface Database {
           url?: string | null
           image_url?: string | null
           size?: string | null
-          description?: string | null
-          style_tags?: string[] | null
-          color_tags?: string[] | null
-          material_tags?: string[] | null
           created_at?: string
         }
         Relationships: [
@@ -91,7 +73,7 @@ export interface Database {
       furniture_attributes: {
         Row: {
           id: number
-          furniture_id: number
+          furniture_id: string // uuid
           mood_keywords: string[] | null
           colors: string[] | null
           materials: string[] | null
@@ -101,7 +83,7 @@ export interface Database {
         }
         Insert: {
           id?: number
-          furniture_id: number
+          furniture_id: string
           mood_keywords?: string[] | null
           colors?: string[] | null
           materials?: string[] | null
@@ -111,7 +93,7 @@ export interface Database {
         }
         Update: {
           id?: number
-          furniture_id?: number
+          furniture_id?: string
           mood_keywords?: string[] | null
           colors?: string[] | null
           materials?: string[] | null

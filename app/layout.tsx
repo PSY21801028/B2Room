@@ -3,8 +3,26 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "AI Interior Designer",
-  description: "AI를 활용한 인테리어 디자인 웹앱",
+  title: "B2Room - AI 인테리어 추천",
+  description: "AI 기반 인테리어 분석 및 가구 추천 서비스",
+  manifest: "/manifest.json",
+  themeColor: "#d4a574",
+  icons: {
+    icon: "/icon.svg",
+    apple: "/icons/icon-192x192.png",
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+    viewportFit: "cover",
+  },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "B2Room",
+  },
 };
 
 export default function RootLayout({

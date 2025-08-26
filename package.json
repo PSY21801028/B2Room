@@ -3,11 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-  "dev": "cross-env NEXT_PUBLIC_SUPABASE_URL=https://dslneqyucwbccfauznyk.supabase.co NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIs... next dev",
-  "build": "next build",
-  "start": "next start"
-}
-,
+    "dev": "cross-env NEXT_PUBLIC_SUPABASE_URL=https://dslneqyucwbccfauznyk.supabase.co NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIs... next dev",
+    "build": "next build",
+    "start": "next start"
+  },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.3",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
@@ -17,6 +16,7 @@
     "clsx": "^2.1.1",
     "lucide-react": "^0.540.0",
     "next": "15.5.0",
+    "next-pwa": "^5.6.0",
     "next-themes": "^0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -26,6 +26,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/next-pwa": "^5.6.9",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

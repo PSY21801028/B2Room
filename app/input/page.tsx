@@ -122,7 +122,7 @@ export default function InputPage() {
               className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#715845] py-4 px-6 text-lg font-semibold text-[#f5f0eb] transition-colors hover:bg-[#8d7057] disabled:opacity-50"
             >
               <Download className="w-5 h-5" />
-              <span>결과 확인하기</span>
+              <span>추천 결과 확인하기</span>
             </Button>
           </Link>
         </div>

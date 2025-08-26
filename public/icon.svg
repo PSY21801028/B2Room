@@ -1,0 +1,25 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" rx="64" fill="#d4a574"/>
+  <rect x="64" y="64" width="384" height="384" rx="32" fill="white"/>
+  
+  <!-- 방 아이콘 -->
+  <rect x="128" y="128" width="256" height="192" fill="#d4a574" rx="8"/>
+  <rect x="140" y="140" width="232" height="168" fill="#f5f0eb" rx="4"/>
+  
+  <!-- 침대 -->
+  <rect x="160" y="200" width="80" height="40" fill="#8b6538" rx="4"/>
+  <rect x="156" y="196" width="88" height="8" fill="#6b4d2a" rx="4"/>
+  
+  <!-- 테이블 -->
+  <rect x="280" y="210" width="60" height="30" fill="#8b6538" rx="2"/>
+  <rect x="284" y="214" width="52" height="4" fill="#6b4d2a"/>
+  
+  <!-- AI 심볼 -->
+  <circle cx="320" cy="160" r="12" fill="#d4a574"/>
+  <circle cx="320" cy="160" r="8" fill="white"/>
+  <rect x="316" y="156" width="8" height="8" fill="#d4a574"/>
+  
+  <!-- B2 텍스트 -->
+  <text x="256" y="380" font-family="Arial, sans-serif" font-size="36" font-weight="bold" text-anchor="middle" fill="#d4a574">B2</text>
+  <text x="256" y="410" font-family="Arial, sans-serif" font-size="20" text-anchor="middle" fill="#8b6538">ROOM</text>
+</svg>
